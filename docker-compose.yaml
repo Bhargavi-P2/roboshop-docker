@@ -1,0 +1,42 @@
+netwroks:
+  default:
+    driver: bridge
+    name: roboshop
+    external: true  #I created network already using docker network create roboshop
+services:
+  mongodb: 
+    image: bhargavi486/mongodb:v1 
+    container_name: mongodb
+  catalogue:
+    image: bhargavi486/catalogue:v1
+    container_name: catalogue
+    depends_on:
+    - mongodb 
+  redis:
+    image: redis:7.0 
+    container_name: redis
+  user: 
+    image: bhargavi486/user:v1
+    container_name: user
+    depends_on:
+    - redis
+    - mongodb
+  cart:
+    image: bhargavi486/cart:v1
+    conatiner_name: cart
+    depends_on:
+    - catalogue
+    - mongodb
+  mysql:
+    image: bhargavi486/mysql:v1
+    conatiner_name: mysql
+  shipping:
+    image: bhargavi486/shipping:v1
+    conatiner_name: shipping
+    depends_on:
+    - mysql
+    - cart
+
+
+
+
