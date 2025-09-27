@@ -45,7 +45,7 @@ services:
   payment:
     image: bhargavi486/payment:v1
     container_name: payment
-    environments:
+    environment:
       CART_HOST: cart
       CART_PORT: 8080
       USER_HOST: user
